@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إيوان المعلقات السبع | أسامة بن عمرو</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #f1d37a;
+            --dark-main: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #fff;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: 3.2rem;
+            color: var(--gold);
+            margin: 0;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        header p {
+            font-family: 'Cairo', sans-serif;
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* تصميم الكارت */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        .card:hover:not(.disabled-card) {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            color: var(--gold-light);
+            margin: 0 0 15px 0;
+        }
+
+        .card p {
+            font-style: italic;
+            color: #bbb;
+            margin: 0 0 20px 0;
+            line-height: 1.6;
+            font-size: 1.2rem;
+        }
+
+        .card .later-text {
+            font-family: 'Cairo', sans-serif;
+            color: #888;
+            font-size: 0.95rem;
+            font-style: normal;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .view-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        .btn-disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .btn-disabled:hover {
+            background: #333;
+            box-shadow: none;
+        }
+
+        /* نافذة المودال لعرض ملفات جوجل */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.93);
+            z-index: 1000;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto 10px;
+        }
+
+        .close-btn {
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #cc0000;
+            border-color: #cc0000;
+        }
+
+        .pdf-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 84vh;
+            margin: 0 auto;
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-family: 'Cairo', sans-serif;
+            color: #555;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>إيوان المعلقات السبع</h1>
+        <p>عرض تفاعلي لأمات القصائد العربية بإشراف وتطوير أسامة بن عمرو</p>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="card">
+            <h2>امرؤ القيس</h2>
+            <p class="later-text">تُرفع لاحقاً...</p>
+            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+        </div>
+
+        <div class="card">
+            <h2>طرفة بن العبد</h2>
+            <p>"لِخَولةَ أَطلالٌ بِبُرقَةِ ثَهمَدِ <br> تَلوحُ كَباقي الوَشمِ في ظاهِرِ اليَدِ"</p>
+            <button class="view-btn" onclick="openGoogleViewer('معلقة طرفة.pdf', 'معلقة طرفة بن العبد البكري')">فتح المعلقة في الموقع</button>
+        </div>
+
+        <div class="card">
+            <h2>زهير بن أبي سلمى</h2>
+            <p class="later-text">تُرفع لاحقاً...</p>
+            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+        </div>
+
+        <div class="card">
+            <h2>لبيد بن ربيعة</h2>
+            <p>"عَفَتِ الدِّيارُ مَحَلُّهَا فَمُقَامُهَا <br> بِمِنًى تَأَبَّدَ غَوْلُهَا فَرِجَامُهَا"</p>
+            <button class="view-btn" onclick="openGoogleViewer('معلقة لبيد.pdf', 'معلقة لبيد بن ربيعة العامري')">فتح المعلقة في الموقع</button>
+        </div>
+
+        <div class="card">
+            <h2>عمرو بن كلثوم</h2>
+            <p class="later-text">تُرفع لاحقاً...</p>
+            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+        </div>
+
+        <div class="card">
+            <h2>الحارث بن حلزة</h2>
+            <p class="later-text">تُرفع لاحقاً...</p>
+            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+        </div>
+
+        <div class="card">
+            <h2>عنترة بن شداد</h2>
+            <p class="later-text">تُرفع لاحقاً...</p>
+            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+        </div>
+
+    </div>
+
+    <div id="pdfModal" class="pdf-modal">
+        <div class="modal-header">
+            <h2 id="pdfTitle" style="color: var(--gold); margin:0; font-family:'Cairo', sans-serif; font-size:1.4rem;">عرض المعلقة</h2>
+            <button class="close-btn" onclick="closePDF()">إغلاق ×</button>
+        </div>
+        <div class="pdf-container">
+            <iframe id="pdfFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>حقوق التطوير والبرمجة محفوظة لأسامة بن عمرو © 2026</p>
+    </footer>
+
+    <script>
+        function openGoogleViewer(fileName, title) {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            document.getElementById('pdfTitle').innerText = title;
+            
+            // هنا يتم جلب رابط موقعك الحالي تلقائياً لدمج الملف مع عارض جوجل المدمج
+            const currentUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+            const fullPdfUrl = currentUrl + fileName;
+            
+            // استخدام رابط عارض جوجل الرسمي المدمج (Google Drive PDF Viewer Embed)
+            frame.src = 'https://docs.google.com/viewer?url=' + encodeURIComponent(fullPdfUrl) + '&embedded=true';
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closePDF() {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfFrame');
+            modal.style.display = 'none';
+            frame.src = ''; 
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
