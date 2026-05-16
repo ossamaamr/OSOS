@@ -1,298 +1,157 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديوان المعلقات السبع | أسامة بن عمرو</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #D4AF37;
-            --gold-light: #f1d37a;
-            --dark-main: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            font-family: 'Amiri', serif;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            color: #fff;
-            margin: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/dark-leather.png');
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        header {
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-        }
-
-        header h1 {
-            font-size: 3.2rem;
-            color: var(--gold);
-            margin: 0;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-
-        header p {
-            font-family: 'Cairo', sans-serif;
-            color: #aaa;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        /* تصميم الكارت */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 200px;
-        }
-
-        .card:hover:not(.disabled-card) {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.05);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
-        }
-
-        .card h2 {
-            font-size: 2rem;
-            color: var(--gold-light);
-            margin: 0 0 15px 0;
-        }
-
-        .card p {
-            font-style: italic;
-            color: #bbb;
-            margin: 0 0 20px 0;
-            line-height: 1.6;
-            font-size: 1.2rem;
-        }
-
-        .card .later-text {
-            font-family: 'Cairo', sans-serif;
-            color: #888;
-            font-size: 0.95rem;
-            font-style: normal;
-        }
-
-        .view-btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background: var(--gold);
-            color: #000;
-            text-decoration: none;
-            border-radius: 50px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        .view-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 15px var(--gold);
-        }
-
-        .btn-disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-        }
-        .btn-disabled:hover {
-            background: #333;
-            box-shadow: none;
-        }
-
-        /* نافذة المودال لعرض ملفات جوجل */
-        .pdf-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.93);
-            z-index: 1000;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1000px;
-            margin: 0 auto 10px;
-        }
-
-        .close-btn {
-            color: #fff;
-            font-size: 28px;
-            cursor: pointer;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--glass-border);
-            padding: 5px 15px;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            transition: 0.3s;
-        }
-
-        .close-btn:hover {
-            background: #cc0000;
-            border-color: #cc0000;
-        }
-
-        .pdf-container {
-            width: 100%;
-            max-width: 1000px;
-            height: 84vh;
-            margin: 0 auto;
-            border: 1px solid var(--gold);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-family: 'Cairo', sans-serif;
-            color: #555;
-            border-top: 1px solid var(--glass-border);
-            margin-top: 40px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="ديوان الحماسة — المعلقات السبع، أمهات القصائد العربية">
+    <title>ديوان الحماسة | المعلقات السبع</title>
+    
+    <!-- الروابط المسبقة والخطوط -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Scheherazade+New:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- التطبيق كـ PWA -->
+    <link rel="manifest" href="https://progressier.json"/>
+    <script defer src="https://progressier.app/JBwScSHEuyi6TZtt5cbF/script.js"></script>
+    
+    <!-- الأنماط المقسمة -->
+    <link rel="stylesheet" href="./src/assets/styles/main.css">
+    <link rel="stylesheet" href="./src/assets/styles/components.css">
+    <link rel="stylesheet" href="./src/assets/styles/responsive.css">
 </head>
 <body>
+    <!-- لوحة الخلفية المتحركة -->
+    <canvas id="stage" aria-hidden="true"></canvas>
 
-    <header>
-        <h1>ديوان المعلقات السبع</h1>
-        <p>عرض تفاعلي لأمهات القصائد العربية بإشراف وتطوير أسامة بن عمرو</p>
+    <!-- رأس الصفحة -->
+    <header class="site-header">
+        <span class="header-ornament" aria-hidden="true">۞ ﷽ ۞</span>
+        <h1 class="site-title">ديوان الحماسة</h1>
+        <svg class="divider-ornament" viewBox="0 0 260 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="0" y1="14" x2="80" y2="14" stroke="#C9A84C" stroke-width=".8" stroke-dasharray="3 4"/>
+            <path d="M90 14 C95 4, 107 4, 112 14 C117 24, 129 24, 130 14 C131 4, 143 4, 148 14 C153 24, 165 24, 170 14" stroke="#C9A84C" stroke-width="1.2" fill="none"/>
+            <circle cx="130" cy="14" r="4" fill="none" stroke="#C9A84C" stroke-width=".9"/>
+            <circle cx="130" cy="14" r="1.5" fill="#C9A84C"/>
+            <line x1="180" y1="14" x2="260" y2="14" stroke="#C9A84C" stroke-width=".8" stroke-dasharray="3 4"/>
+        </svg>
+        <p class="site-subtitle">أمهات القصائد العربية — المعلقات السبع</p>
+        <p class="site-byline">تطوير: أسامة بن عمرو السَّروجيُّ</p>
     </header>
 
-    <div class="main-container">
-        
-        <div class="card">
-            <h2>امرؤ القيس</h2>
-            <p class="later-text">تُرفع لاحقاً...</p>
-            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
-        </div>
+    <!-- شبكة المعلقات والقصائد -->
+    <main>
+        <div class="grid" id="poemsGrid">
+            <article class="poem-card" data-index="١">
+                <span class="card-index" aria-hidden="true">١</span>
+                <h2 class="card-poet">امرؤ القيس</h2>
+                <p class="card-verse" lang="ar">قِفا نَبكِ من ذِكرى حَبيبٍ وَمَنزِلِ<br>بِسِقطِ اللِّوى بَين الدَّخولِ فَحَومَلِ</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1oGB64IcGOCGTSPtvoREZgb40u8gVRUXT" data-title="معلقة امرؤ القيس">📖 قراءة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1oGB64IcGOCGTSPtvoREZgb40u8gVRUXT" target="_blank" rel="noopener" aria-label="تحميل معلقة امرؤ القيس">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>طرفة بن العبد</h2>
-            <p>"لِخَولةَ أَطلالٌ بِبُرقَةِ ثَهمَدِ <br> تَلوحُ كَباقي الوَشمِ في ظاهِرِ اليَدِ"</p>
-            <button class="view-btn" onclick="openGoogleViewer('معلقة طرفة.pdf', 'معلقة طرفة بن العبد البكري')">فتح المعلقة في الموقع</button>
-        </div>
+            <article class="poem-card" data-index="٢">
+                <span class="card-index" aria-hidden="true">٢</span>
+                <h2 class="card-poet">طرفة بن العبد</h2>
+                <p class="card-verse" lang="ar">لِخَولةَ أَطلالٌ بِبُرقَةِ ثَهمَدِ<br>تَلوحُ كَباقي الوَشمِ في ظاهِرِ اليَدِ</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1Mn-PDGvmMEHGHNBcKvWUcB79IQA61fc7" data-title="معلقة طرفة بن العبد">📖 قراءة معلقة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1Mn-PDGvmMEHGHNBcKvWUcB79IQA61fc7" target="_blank" rel="noopener" aria-label="تحميل معلقة طرفة بن العبد">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>زهير بن أبي سلمى</h2>
-            <p class="later-text">تُرفع لاحقاً...</p>
-            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
-        </div>
+            <article class="poem-card" data-index="٣">
+                <span class="card-index" aria-hidden="true">٣</span>
+                <h2 class="card-poet">زهير بن أبي سلمى</h2>
+                <p class="card-verse" lang="ar">أَمِن أُمِّ أَوفى دِمنَةٌ لَم تَكَلَّمِ<br>بِحَوْمانَةِ الدَّرَّاجِ فَالمُتَثَلَّمِ</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1AXGmLR67Yms6_L2URDoSF-nCyLTLpgFK" data-title="معلقة زهير بن أبي سلمى">📖 قراءة المعلقة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1AXGmLR67Yms6_L2URDoSF-nCyLTLpgFK" target="_blank" rel="noopener" aria-label="تحميل معلقة زهير بن أبي سلمى">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>لبيد بن ربيعة</h2>
-            <p>"عَفَتِ الدِّيارُ مَحَلُّهَا فَمُقَامُهَا <br> بِمِنًى تَأَبَّدَ غَوْلُهَا فَرِجَامُهَا"</p>
-            <button class="view-btn" onclick="openGoogleViewer('معلقة لبيد.pdf', 'معلقة لبيد بن ربيعة العامري')">فتح المعلقة في الموقع</button>
-        </div>
+            <article class="poem-card" data-index="٤">
+                <span class="card-index" aria-hidden="true">٤</span>
+                <h2 class="card-poet">عمرو بن كلثوم</h2>
+                <p class="card-verse" lang="ar">أَلا هبِّي بِصَحنِكِ فَاصَحينا<br>وَلا تُبقي خُمورَ الأَندَرينا</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1LYF1DkQZR1fbuOJerxaqCqivJtgYfb4y" data-title="معلقة عمرو بن كلثوم">📖 قراءة المعلقة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1LYF1DkQZR1fbuOJerxaqCqivJtgYfb4y" target="_blank" rel="noopener" aria-label="تحميل معلقة عمرو بن كلثوم">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>عمرو بن كلثوم</h2>
-            <p class="later-text">تُرفع لاحقاً...</p>
-            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
-        </div>
+            <article class="poem-card" data-index="٥">
+                <span class="card-index" aria-hidden="true">٥</span>
+                <h2 class="card-poet">لبيد بن ربيعة رضي الله عنه</h2>
+                <p class="card-verse" lang="ar">عَفَتِ الدِّيارُ مَحَلُّها فَمُقامُها<br>بِمِنىً تَأَبَّدَ غَوْلُها فَرِجامُها</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1OYFvqu-PXpfa2C8lhycZ-Xw15vja7rQ0" data-title="معلقة لبيد بن ربيعة">📖 قراءة المعلقة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1OYFvqu-PXpfa2C8lhycZ-Xw15vja7rQ0" target="_blank" rel="noopener" aria-label="تحميل معلقة لبيد بن ربيعة">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>الحارث بن حلزة</h2>
-            <p class="later-text">تُرفع لاحقاً...</p>
-            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
-        </div>
+            <article class="poem-card" data-index="٦">
+                <span class="card-index" aria-hidden="true">٦</span>
+                <h2 class="card-poet">عنترة بن شداد</h2>
+                <p class="card-verse" lang="ar">هَل غادَرَ الشُّعَراءُ من مُتَرَدَّمِ<br>أَم هَل عَرَفتَ الدَّارَ بَعدَ تَوَهُّمِ</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1HAKrdlgYc8AkKiH8BRY9Sv3hNKYXEAY4" data-title="معلقة عنترة بن شداد">📖 قراءة قلادة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1HAKrdlgYc8AkKiH8BRY9Sv3hNKYXEAY4" target="_blank" rel="noopener" aria-label="تحميل معلقة عنترة بن شداد">⬇ تحميل</a>
+                </div>
+            </article>
 
-        <div class="card">
-            <h2>عنترة بن شداد</h2>
-            <p class="later-text">تُرفع لاحقاً...</p>
-            <button class="view-btn btn-disabled" disabled>عرض المعلقة</button>
+            <article class="poem-card" data-index="٧">
+                <span class="card-index" aria-hidden="true">٧</span>
+                <h2 class="card-poet">الحارث بن حلزة</h2>
+                <p class="card-verse" lang="ar">آذَنَتنا بِبَينِها أَسماءُ<br>رُبَّ ثاوٍ يُمَلُّ مِنهُ الثَّوَاءُ</p>
+                <div class="btn-row">
+                    <button class="btn-primary" data-fileid="1bGSXtuc0k5dPDXSTTyw8ZCcz8O1WK_Xu" data-title="معلقة الحارث بن حلزة">📖 قراءة المعلقة</button>
+                    <a class="btn-ghost" href="https://drive.google.com/uc?export=download&id=1bGSXtuc0k5dPDXSTTyw8ZCcz8O1WK_Xu" target="_blank" rel="noopener" aria-label="تحميل معلقة الحارث بن حلزة">⬇ تحميل</a>
+                </div>
+            </article>
         </div>
+    </main>
 
+    <!-- النافذة المنبثقة الذكية -->
+    <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+        <div class="modal-shell" id="modalShell">
+            <div class="modal-bar">
+                <span class="modal-title" id="modalTitle">📖 قراءة مستندات</span>
+                <div class="modal-actions">
+                    <a id="btnDownload" href="#" target="_blank" rel="noopener" class="modal-btn modal-btn-gold"> ⬇ تحميل </a>
+                    <a id="btnDrive" href="#" target="_blank" rel="noopener" class="modal-btn modal-btn-outline"> 🌐 Drive </a>
+                    <button class="modal-btn modal-btn-close" id="btnClose"> ✕ إغلاق </button>
+                </div>
+            </div>
+            <div class="embed-area">
+                <div class="embed-loader" id="embedLoader">
+                    <div class="ring"></div>
+                    <span class="loader-label">جاري تحميل المعلقة…</span>
+                </div>
+                <iframe id="embedFrame" class="embed-frame" src="" title="عرض المعلقة" allow="autoplay" loading="lazy"></iframe>
+                <div class="embed-fallback" id="embedFallback" role="alert">
+                    <span class="fallback-icon" aria-hidden="true">🔒</span>
+                    <h3 class="fallback-title">تعذّر العرض المباشر</h3>
+                    <p class="fallback-desc">لا يسمح بملفات شروط حماية جوجل الحالية برؤية الملف هنا.<br>استخدم الخيارات البديلة للوصول للقصيدة.</p>
+                    <div class="fallback-btns">
+                        <a id="fallbackDrive" href="#" target="_blank" rel="noopener" class="fallback-btn fallback-btn-primary"> 🌐 فتح في Google Drive </a>
+                        <a id="fallbackDownload" href="#" target="_blank" rel="noopener" class="fallback-btn fallback-btn-secondary"> 📥 تحميل الملف </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="pdfModal" class="pdf-modal">
-        <div class="modal-header">
-            <h2 id="pdfTitle" style="color: var(--gold); margin:0; font-family:'Cairo', sans-serif; font-size:1.4rem;">عرض المعلقة</h2>
-            <button class="close-btn" onclick="closePDF()">إغلاق ×</button>
-        </div>
-        <div class="pdf-container">
-            <iframe id="pdfFrame" src=""></iframe>
-        </div>
-    </div>
-
-    <footer>
+    <!-- تذييل الصفحة -->
+    <footer class="site-footer">
         <p>حقوق التطوير والبرمجة محفوظة لأسامة بن عمرو © 2026</p>
+        <p class="footer-note">ديوان الحماسة — المعلقات السبع — التراث العربي</p>
     </footer>
 
-    <script>
-        function openGoogleViewer(fileName, title) {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdfFrame');
-            document.getElementById('pdfTitle').innerText = title;
-            
-            // هنا يتم جلب رابط موقعك الحالي تلقائياً لدمج الملف مع عارض جوجل المدمج
-            const currentUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-            const fullPdfUrl = currentUrl + fileName;
-            
-            // استخدام رابط عارض جوجل الرسمي المدمج (Google Drive PDF Viewer Embed)
-            frame.src = 'https://docs.google.com/viewer?url=' + encodeURIComponent(fullPdfUrl) + '&embedded=true';
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closePDF() {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdfFrame');
-            modal.style.display = 'none';
-            frame.src = ''; 
-            document.body.style.overflow = 'auto';
-        }
-    </script>
+    <!-- سكريبت التشغيل الموديولي -->
+    <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
