@@ -1,1 +1,66 @@
+/* src/assets/styles/main.css */
+:root {
+    --gold: #C9A84C;
+    --gold-bright: #E8C96A;
+    --gold-dim: #8A6F2E;
+    --gold-glow: rgba(201,168,76,.18);
+    --gold-line: rgba(201,168,76,.25);
+    --bg-void: #06060A;
+    --bg-surface: #0E0D14;
+    --bg-card: rgba(255,255,255,.028);
+    --bg-hover: rgba(255,255,255,.05);
+    --text-main: #EDE8D5;
+    --text-muted: #7A7567;
+    --text-soft: #B0A898;
+    --radius-card: 20px;
+    --radius-btn: 50px;
+    --transition: cubic-bezier(.22,.68,0,1.2);
+}
 
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) var(--bg-surface);
+    -webkit-text-size-adjust: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-surface);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold-dim);
+    border-radius: 3px;
+}
+
+body {
+    font-family: 'Amiri', serif;
+    background: var(--bg-void);
+    color: var(--text-main);
+    min-height: 100svh;
+    overflow-x: hidden;
+}
+
+#stage {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(ellipse 80% 60% at 15% 40%, rgba(100,60,10,.12) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 85% 70%, rgba(60,40,10,.09) 0%, transparent 55%);
+    pointer-events: none;
+}
