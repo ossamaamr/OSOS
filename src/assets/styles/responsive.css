@@ -1,1 +1,72 @@
+/* src/assets/styles/responsive.css */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
+    }
+    .poem-card {
+        opacity: 1;
+        translate: 0;
+    }
+}
 
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 0 12px;
+    }
+    .poem-card {
+        padding: 22px 18px;
+    }
+    .btn-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-primary, .btn-ghost {
+        max-width: none;
+        width: 100%;
+        justify-content: center;
+    }
+    .modal-bar {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+    .modal-actions {
+        gap: 6px;
+    }
+    .modal-btn {
+        padding: 7px 10px;
+        font-size: .75rem;
+    }
+    .modal-shell {
+        height: min(95svh, 700px);
+        border-radius: 16px;
+    }
+    .site-header {
+        padding: 32px 16px 28px;
+    }
+    .fallback-btns {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .fallback-btn {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@supports (padding: max(0px)) {
+    .site-header {
+        padding-top: max(40px, calc(40px + env(safe-area-inset-top)));
+    }
+    .site-footer {
+        padding-bottom: max(28px, calc(28px + env(safe-area-inset-bottom)));
+    }
+}
